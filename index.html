@@ -3,9 +3,15 @@
   <head>
     <meta charset="utf-8">
     <title>vue-ctk-time-picker</title>
+    <link rel="stylesheet" href="./assets/main.css">
   </head>
   <body>
-    <div id="app"></div>
+    <div id="vueCtkTimePicker">
+      <img src="./assets/logo.png" alt="Ctk logo">
+      <h1>CtkTimePicker</h1>
+      <h3>A VueJs component for select time (24h format)</h3>
+      <ctk-time-picker v-model="value" format="hh:mm" label="Ta mère la pure"></ctk-time-picker>
+    </div>
     <script src="/dist/build.js"></script>
   </body>
 </html>
