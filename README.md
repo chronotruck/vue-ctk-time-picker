@@ -23,10 +23,11 @@ var yourComponent = new Vue({
 <template>
   ...
   <ctk-time-picker
-    v-model="value" 
+    v-model="value" // if you want init value : always this format 'HH:mm'
     :label="'Choose a time'"
     :hint="'Text'"
     :error-hint="true"
+    :minute-interval="10"
     color="#FF0000" />
   ...
 </template>  
@@ -42,6 +43,7 @@ var yourComponent = new Vue({
 | hint*       | text       | no       | -         |                |
 | error-hint** | Boolean    | no      | false     |                |
 | color***     | String (hex) | no    | dodgerblue |            |
+| minute-interval | Int | no    | 1    |            |
 
 *hint : Is a text that replaces the label/placeholder
 

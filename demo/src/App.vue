@@ -2,9 +2,13 @@
   <div id="app">
     <img src="./assets/logo.png" alt="Ctk logo">
     <div>
-      <h1>VueCtkInputText</h1>
-      <h3>A VueJs component for an input with good UX</h3>
+      <h1>VueCtkTimePicker</h1>
+      <h3>A VueJs component for select time</h3>
       <ctk-time-picker label="Choose a time" v-model="value" ></ctk-time-picker>
+      <br>
+      <ctk-time-picker label="With color" v-model="value2" color="#89c200" ></ctk-time-picker>
+      <br>
+      <ctk-time-picker label="Minute interval : 10" v-model="value2" color="#89c200" :minute-interval="10"></ctk-time-picker>
     </div>
   </div>
 </template>
@@ -19,7 +23,8 @@ export default {
   },
   data () {
     return {
-      value: '02:00'
+      value: '02:00',
+      value2: null
     }
   }
 }
