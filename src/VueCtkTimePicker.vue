@@ -1,11 +1,11 @@
 <template>
   <div id="VueCtkTimePicker" class="time-picker">
-    <div ref="parent" class="field" :class="{'is-focused': showDropdown, 'has-value': displayTime !== label, 'has-error': errorHint}">
+    <div ref="parent" class="field" :class="{'is-focused': showDropdown, 'has-value': value, 'has-error': errorHint}">
       <label for="ctk-input-text" class="field-label" :class="hint ? (errorHint ? 'text-danger' : 'text-primary') : ''" :style="{color: showDropdown ? color : ''}">{{hint || label}}</label>
       <input type="text" ref="CtkTimePicker"
              @click.stop="toggleDropdown" id="ctk-input-text" class="field-input"
              :placeholder="label"
-             :value="displayTime"
+             :value="value"
              @input="updateValue"
              :style="{borderColor: showDropdown ? color : ''}"
              readonly>
@@ -28,11 +28,11 @@
 
 <script>
   export default {
-    name: 'VueTimepicker',
+    name: 'CtkTimepicker',
     props: {
       value: {type: String},
       minuteInterval: {type: Number},
-      id: {type: String},
+      id: {type: String, default: 'CtkTimePicker'},
       label: {type: String, default: 'Choose a time'},
       hint: { type: String },
       errorHint: { type: Boolean },
@@ -47,29 +47,18 @@
         muteWatch: false,
         hourType: 'HH',
         minuteType: 'mm',
-        hour: '',
-        minute: '',
-        fullValues: undefined,
+        hour: this.value ? this.value.split(':')[0] : null,
+        minute: this.value ? this.value.split(':')[1] : null,
         format: 'HH:mm'
       }
     },
 
+    mounted () {
+      console.log('value', this.value)
+      this.renderFormat()
+    },
+
     computed: {
-      displayTime () {
-        if (!this.hour && !this.minute) {
-          return this.label
-        } else {
-          let formatString = String((this.format))
-          if (this.hour) {
-            formatString = formatString.replace(new RegExp(this.hourType, 'g'), this.hour)
-          }
-          if (this.minute) {
-            formatString = formatString.replace(new RegExp(this.minuteType, 'g'), this.minute)
-          }
-          this.$emit('input', formatString)
-          return formatString
-        }
-      },
       styleColor () {
         return {
           backgroundColor: this.color
@@ -160,11 +149,22 @@
         } else if (type === 'minute') {
           this.minute = value
         }
+        let formatString = String((this.format))
+        if (this.hour) {
+          formatString = formatString.replace(new RegExp(this.hourType, 'g'), this.hour)
+        } else {
+          formatString = formatString.replace(new RegExp(this.hourType, 'g'), '00')
+          this.hour = '00'
+        }
+        if (this.minute) {
+          formatString = formatString.replace(new RegExp(this.minuteType, 'g'), this.minute)
+        } else {
+          formatString = formatString.replace(new RegExp(this.minuteType, 'g'), '00')
+          this.minute = '00'
+        }
+        this.$emit('input', formatString)
+        return formatString
       }
-    },
-
-    mounted () {
-      this.renderFormat()
     }
   }
 </script>

@@ -4,27 +4,22 @@
     <div>
       <h1>VueCtkInputText</h1>
       <h3>A VueJs component for an input with good UX</h3>
-      <ctk-input-text label="Initial input" v-model="value2" ></ctk-input-text>
-      <br>
-      <ctk-input-text label="Input with value" v-model="value"></ctk-input-text>
-      <br>
-      <ctk-input-text label="Input with error-hint: true + text hint" v-model="value2" hint="Error text" :error-hint="true"></ctk-input-text>
+      <ctk-time-picker label="Choose a time" v-model="value" ></ctk-time-picker>
     </div>
   </div>
 </template>
 
 <script>
-import CtkInputText from 'vue-ctk-input-text'
+import CtkTimePicker from 'vue-ctk-time-picker'
 
 export default {
   name: 'App',
   components: {
-    CtkInputText
+    CtkTimePicker
   },
   data () {
     return {
-      value: 'Hello world!',
-      value2: null
+      value: '02:00'
     }
   }
 }

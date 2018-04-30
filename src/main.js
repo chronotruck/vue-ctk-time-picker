@@ -8,12 +8,16 @@ if (document.querySelector('#vueCtkTimePicker')) {
     el: '#vueCtkTimePicker',
     data () {
       return {
-        value: null
+        value: '02:00',
+        value2: null
       }
     },
     watch: {
       value (val) {
-        console.log('val', val)
+        console.log('value', val)
+      },
+      value2 (val) {
+        console.log('value2', val)
       }
     }
   })
