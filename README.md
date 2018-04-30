@@ -12,7 +12,7 @@ npm install vue-ctk-time-picker --save
 ```
 #### In single component
 ``` js
-import CtkInputText from 'vue-ctk-time-picker'
+import CtkTimePicker from 'vue-ctk-time-picker'
 
 var yourComponent = new Vue({
   components: { CtkTimePicker },
@@ -26,7 +26,8 @@ var yourComponent = new Vue({
     v-model="value" 
     :label="'Choose a time'"
     :hint="'Text'"
-    :error-hint="true" />
+    :error-hint="true"
+    color="#FF0000" />
   ...
 </template>  
 ```
@@ -40,9 +41,9 @@ var yourComponent = new Vue({
 | type       | String     | no       | text       | text or number |
 | hint*       | text       | no       | -         |                |
 | error-hint** | Boolean    | no      | false     |                |
-| color***     | String    | no       | dodgerblue |                |
+| color***     | String (hex) | no    | dodgerblue |            |
 
-*hint : Is a text that replaces the label
+*hint : Is a text that replaces the label/placeholder
 
 **error-hint : When is `true` --> Input border & label are red 
 
