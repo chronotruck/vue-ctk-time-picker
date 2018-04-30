@@ -1,9 +1,9 @@
 <template>
   <div id="VueCtkTimePicker" class="time-picker">
     <div ref="parent" class="field" :class="{'is-focused': showDropdown, 'has-value': value, 'has-error': errorHint}">
-      <label for="ctk-input-text" class="field-label" :class="hint ? (errorHint ? 'text-danger' : 'text-primary') : ''" :style="{color: showDropdown ? color : ''}">{{hint || label}}</label>
+      <label :for="id" class="field-label" :class="hint ? (errorHint ? 'text-danger' : 'text-primary') : ''" :style="{color: showDropdown ? color : ''}">{{hint || label}}</label>
       <input type="text" ref="CtkTimePicker"
-             @click.stop="toggleDropdown" id="ctk-input-text" class="field-input"
+             @click.stop="toggleDropdown" :id="id" class="field-input"
              :placeholder="label"
              :value="value"
              @input="updateValue"
@@ -15,11 +15,11 @@
       <div class="select-list">
         <ul class="hours">
           <li class="hint" v-text="hourType"></li>
-          <li v-for="hr in hours" v-text="hr" :class="{active: hour === hr}" :style="(color && hour === hr) ? styleColor : ''" @click.stop="select('hour', hr)"></li>
+          <li v-for="hr in hours" v-text="hr" :class="[{active: hour === hr}, hr]" :style="(color && hour === hr) ? styleColor : ''" @click.stop="select('hour', hr)"></li>
         </ul>
         <ul class="minutes">
           <li class="hint" v-text="minuteType"></li>
-          <li v-for="m in minutes" v-text="m" :class="{active: minute === m}" :style="(color && minute === m) ? styleColor : ''" @click.stop="select('minute', m)"></li>
+          <li v-for="m in minutes" v-text="m" :class="[{active: minute === m}, m]" :style="(color && minute === m) ? styleColor : ''" @click.stop="select('minute', m)"></li>
         </ul>
       </div>
     </div>
@@ -54,7 +54,6 @@
     },
 
     mounted () {
-      console.log('value', this.value)
       this.renderFormat()
     },
 
