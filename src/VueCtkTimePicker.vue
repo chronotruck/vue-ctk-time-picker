@@ -1,6 +1,6 @@
 <template>
   <div id="VueCtkTimePicker" class="time-picker">
-    <div ref="parent" class="field" :class="{'is-focused': isFocus, 'has-value': displayTime, 'has-error': errorHint}">
+    <div ref="parent" class="field" :class="{'is-focused': isFocus, 'has-value': displayTime !== label, 'has-error': errorHint}">
       <label for="ctk-input-text" class="field-label" :class="hint ? (errorHint ? 'text-danger' : 'text-primary') : ''">{{hint || label}}</label>
       <input type="text" ref="CtkTimePicker" @click.stop="toggleDropdown" id="ctk-input-text" class="field-input" :placeholder="label" @focus="onFocus" @blur="onBlur" :value="displayTime" @input="updateValue" readonly>
     </div>
