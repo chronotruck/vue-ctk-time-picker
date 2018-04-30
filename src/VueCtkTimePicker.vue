@@ -1,19 +1,25 @@
 <template>
   <div id="VueCtkTimePicker" class="time-picker">
-    <div ref="parent" class="field" :class="{'is-focused': isFocus, 'has-value': displayTime !== label, 'has-error': errorHint}">
-      <label for="ctk-input-text" class="field-label" :class="hint ? (errorHint ? 'text-danger' : 'text-primary') : ''">{{hint || label}}</label>
-      <input type="text" ref="CtkTimePicker" @click.stop="toggleDropdown" id="ctk-input-text" class="field-input" :placeholder="label" @focus="onFocus" @blur="onBlur" :value="displayTime" @input="updateValue" readonly>
+    <div ref="parent" class="field" :class="{'is-focused': showDropdown, 'has-value': displayTime !== label, 'has-error': errorHint}">
+      <label for="ctk-input-text" class="field-label" :class="hint ? (errorHint ? 'text-danger' : 'text-primary') : ''" :style="{color: showDropdown ? color : ''}">{{hint || label}}</label>
+      <input type="text" ref="CtkTimePicker"
+             @click.stop="toggleDropdown" id="ctk-input-text" class="field-input"
+             :placeholder="label"
+             :value="displayTime"
+             @input="updateValue"
+             :style="{borderColor: showDropdown ? color : ''}"
+             readonly>
     </div>
     <div class="time-picker-overlay" v-if="showDropdown" @click.stop="toggleDropdown"></div>
     <div class="dropdown" v-show="showDropdown">
       <div class="select-list">
         <ul class="hours">
           <li class="hint" v-text="hourType"></li>
-          <li v-for="hr in hours" v-text="hr" :class="{active: hour === hr}" @click.stop="select('hour', hr)"></li>
+          <li v-for="hr in hours" v-text="hr" :class="{active: hour === hr}" :style="(color && hour === hr) ? styleColor : ''" @click.stop="select('hour', hr)"></li>
         </ul>
         <ul class="minutes">
           <li class="hint" v-text="minuteType"></li>
-          <li v-for="m in minutes" v-text="m" :class="{active: minute === m}" @click.stop="select('minute', m)"></li>
+          <li v-for="m in minutes" v-text="m" :class="{active: minute === m}" :style="(color && minute === m) ? styleColor : ''" @click.stop="select('minute', m)"></li>
         </ul>
       </div>
     </div>
@@ -29,7 +35,8 @@
       id: {type: String},
       label: {type: String, default: 'Choose a time'},
       hint: { type: String },
-      errorHint: { type: Boolean }
+      errorHint: { type: Boolean },
+      color: { type: String }
     },
 
     data () {
@@ -43,7 +50,6 @@
         hour: '',
         minute: '',
         fullValues: undefined,
-        isFocus: false,
         format: 'HH:mm'
       }
     },
@@ -63,16 +69,15 @@
           this.$emit('input', formatString)
           return formatString
         }
+      },
+      styleColor () {
+        return {
+          backgroundColor: this.color
+        }
       }
     },
 
     methods: {
-      onFocus () {
-        this.isFocus = true
-      },
-      onBlur () {
-        this.isFocus = false
-      },
       updateValue () {
         this.$emit('input', this.$refs.CtkTimePicker.value)
       },
@@ -231,9 +236,7 @@
         cursor: default;
         font-size: 0.8em;
       }
-      ul.minutes,
-      ul.seconds,
-      ul.apms{
+      ul.minutes {
         border-left: 1px solid #fff;
       }
     }
@@ -265,6 +268,7 @@
         background-color: transparent;
         border: 1px solid rgba(0, 0, 0, 0.2);
         border-radius: 4px;
+        font-size: 14px;
       }
       &.has-error {
         .field-input {
