@@ -1,7 +1,7 @@
 {
   "name": "vue-ctk-time-picker",
   "description": "A vue component for select time (by Chronotruck)",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Mazel <loic.mazuel@chronotruck.com>",
   "license": "MIT",
   "main": "src/main.js",
