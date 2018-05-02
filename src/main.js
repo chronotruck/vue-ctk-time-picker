@@ -6,18 +6,10 @@ if (document.querySelector('#vueCtkTimePicker')) {
 
   new Vue({
     el: '#vueCtkTimePicker',
-    data () {
+    data: function () {
       return {
         value: '02:00',
         value2: null
-      }
-    },
-    watch: {
-      value (val) {
-        console.log('value', val)
-      },
-      value2 (val) {
-        console.log('value2', val)
       }
     }
   })

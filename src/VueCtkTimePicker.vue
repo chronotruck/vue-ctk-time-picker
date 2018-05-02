@@ -39,7 +39,7 @@
       color: { type: String }
     },
 
-    data () {
+    data: function () {
       return {
         hours: [],
         minutes: [],
@@ -53,12 +53,12 @@
       }
     },
 
-    mounted () {
+    mounted: function () {
       this.renderFormat()
     },
 
     computed: {
-      styleColor () {
+      styleColor: function () {
         return {
           backgroundColor: this.color
         }
@@ -66,10 +66,10 @@
     },
 
     methods: {
-      updateValue () {
+      updateValue: function () {
         this.$emit('input', this.$refs.CtkTimePicker.value)
       },
-      formatValue (type, i) {
+      formatValue: function (type, i) {
         switch (type) {
           case 'H':
           case 'm':
@@ -90,7 +90,7 @@
         }
       },
 
-      renderFormat (newFormat) {
+      renderFormat: function (newFormat) {
         newFormat = newFormat || this.format
         if (!newFormat || !newFormat.length) {
           newFormat = 'HH:mm'
@@ -100,15 +100,15 @@
         this.renderList('minute')
       },
 
-      renderHoursList () {
-        const hoursCount = 24
+      renderHoursList: function () {
+        var hoursCount = 24
         this.hours = []
         for (let i = 0; i < hoursCount; i++) {
           this.hours.push(this.formatValue(this.hourType, i))
         }
       },
 
-      renderList (listType, interval) {
+      renderList: function (listType, interval) {
         if (listType === 'minute') {
           interval = interval || this.minuteInterval
         } else {
@@ -138,11 +138,11 @@
         }
       },
 
-      toggleDropdown () {
+      toggleDropdown: function () {
         this.showDropdown = !this.showDropdown
       },
 
-      select (type, value) {
+      select: function (type, value) {
         if (type === 'hour') {
           this.hour = value
         } else if (type === 'minute') {
