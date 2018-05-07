@@ -13,14 +13,18 @@
     <div class="time-picker-overlay" v-if="showDropdown" @click.stop="toggleDropdown"></div>
     <div class="dropdown" v-show="showDropdown">
       <div class="select-list">
-        <ul class="hours">
-          <li class="hint" v-text="hourType"></li>
-          <li v-for="hr in hours" v-text="hr" :class="[{active: hour === hr}, hr]" :style="(color && hour === hr) ? styleColor : ''" @click.stop="select('hour', hr)"></li>
-        </ul>
-        <ul class="minutes">
-          <li class="hint" v-text="minuteType"></li>
-          <li v-for="m in minutes" v-text="m" :class="[{active: minute === m}, m]" :style="(color && minute === m) ? styleColor : ''" @click.stop="select('minute', m)"></li>
-        </ul>
+        <div class="time-container">
+          <ul class="hours">
+            <li class="hint" v-text="hourType"></li>
+            <li v-for="hr in hours" v-text="hr" :class="[{active: hour === hr}, hr]" :style="(color && hour === hr) ? styleColor : ''" @click.stop="select('hour', hr)"></li>
+          </ul>
+        </div>
+        <div class="time-container">
+          <ul class="minutes">
+            <li class="hint" v-text="minuteType"></li>
+            <li v-for="m in minutes" v-text="m" :class="[{active: minute === m}, m]" :style="(color && minute === m) ? styleColor : ''" @click.stop="select('minute', m)"></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -205,39 +209,41 @@
         flex-flow: row nowrap;
         align-items: stretch;
         justify-content: space-between;
-      }
-      ul {
-        padding: 0;
-        margin: 0;
-        list-style: none;
-
-        flex: 1;
-        overflow-x: hidden;
-        overflow-y: auto;
-        li {
-          text-align: center;
-          padding: 0.3em 0;
-          color: #161616;
-          &:not(.hint):hover {
-            background: rgba(0,0,0,.08);
-            color: #161616;
-            cursor: pointer;
+        .time-container {
+          overflow-x: hidden;
+          overflow-y: auto;
+          flex: 1;
+          ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            li {
+              text-align: center;
+              padding: 0.3em 0;
+              color: #161616;
+              &:not(.hint):hover {
+                background: rgba(0,0,0,.08);
+                color: #161616;
+                cursor: pointer;
+              }
+            }
+            li.active,
+            li.active:hover {
+              background: dodgerblue;
+              color: #fff;
+            }
+          }
+          .hint {
+            color: #a5a5a5;
+            cursor: default;
+            font-size: 0.8em;
+          }
+          ul.minutes {
+            border-left: 1px solid #fff;
           }
         }
-        li.active,
-        li.active:hover {
-          background: dodgerblue;
-          color: #fff;
-        }
       }
-      .hint {
-        color: #a5a5a5;
-        cursor: default;
-        font-size: 0.8em;
-      }
-      ul.minutes {
-        border-left: 1px solid #fff;
-      }
+
     }
     .field{
       position: relative;
