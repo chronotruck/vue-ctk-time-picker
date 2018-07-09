@@ -3,6 +3,14 @@
 > A vue component for select time (by Chronotruck)
 
 ## Demo
+!!! This component is unmaintained !!!
+Use `vue-ctk-date-time-picker` component
+Link : [VueCtkDateTimePicker](https://github.com/chronotruck/vue-ctk-date-time-picker/)
+
+
+
+
+## Demo
 An [example](https://htmlpreview.github.io/?https://github.com/chronotruck/vue-ctk-time-picker/blob/master/demo/dist/index.html) is available
 
 ## Install
@@ -47,7 +55,7 @@ var yourComponent = new Vue({
 
 *hint : Is a text that replaces the label/placeholder
 
-**error-hint : When is `true` --> Input border & label are red 
+**error-hint : When is `true` --> Input border & label are red
 
 ***color: Replace color for the hint, the borders & time selected in dropdown   
 
