@@ -3,7 +3,7 @@
 > A vue component for select time (by Chronotruck)
 
 ## Component Unmaintained
-!!! This component is unmaintained !!!
+`!!! This component is unmaintained !!!`
 
 Use `vue-ctk-date-time-picker` component
 
